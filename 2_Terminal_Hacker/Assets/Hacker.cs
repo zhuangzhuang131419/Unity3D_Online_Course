@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
+
+    // Game state
+    int level;
+    enum Screen { MainMenu, Password, Win };
+    Screen currentScreen = Screen.MainMenu;
+
     // Start is called before the first frame update
     void Start()
     {
         ShowMainMenu();
-        print("Hello " + "World");
     }
 
     void ShowMainMenu()
@@ -26,6 +31,16 @@ public class Hacker : MonoBehaviour
         if (input == "menu")
         {
             ShowMainMenu();
+        } // TODO handle differently depending on screen
+        else if (input == "1")
+        {
+            level = 1;
+            StartGame();
+        }
+        else if (input == "2")
+        {
+            level = 2;
+            StartGame();
         }
         else if (input == "007")
         {
@@ -35,5 +50,12 @@ public class Hacker : MonoBehaviour
         {
             Terminal.WriteLine("Please choose a valid level");
         }
+    }
+
+    void StartGame()
+    {
+        currentScreen = Screen.Password;
+        Terminal.WriteLine("You have chosen level " + level);
+        Terminal.WriteLine("Please enter your password: ");
     }
 }
